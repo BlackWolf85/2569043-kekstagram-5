@@ -1,8 +1,9 @@
+
 import {debounce, shuffle} from './util.js';
 import {createPhoto, removePhoto} from './photos.js';
 import {photos} from './main.js';
 const imgFilterElement = document.querySelector('.img-filters__form');
-const activeFilter = document.querySelector('img-filters__button--active');
+let activeFilter = document.querySelector('img-filters__button--active');
 const maxPhotoNum = 10;
 const mainFilters = {
   'filter-default': () => photos.slice(),
@@ -14,9 +15,9 @@ const apply = (id) =>{
   createPhoto(mainFilters[id]());
 };
 const toogleBtn = (evt) => {
-  activeButton.classList.remove('img-filters__button--active');
-  activeButton = evt.target;
-  activeButton.classList.add('img-filters__button--active');
+  activeFilter.classList.remove('img-filters__button--active');
+  activeFilter = evt.target;
+  activeFilter.classList.add('img-filters__button--active');
 };
 const filterClick = debounce((evt) => {
   evt.preventDefault();
@@ -26,5 +27,5 @@ const filterClick = debounce((evt) => {
   }
 });
 export const initFilters = () => {
-  filtersForm.addEventListener('click', filterClick);
+  imgFilterElement.addEventListener('click', filterClick);
 };
